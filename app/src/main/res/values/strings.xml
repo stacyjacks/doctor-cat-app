@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">DoctorCat</string>
+    <string name="login_screen_welcome_text">Help is here.</string>
+    <string name="welcome_screen_provide_your_cat_text">Provide your cat(s) with the appropriate care.</string>
+    <string name="two_cat_silhouettes_content_description">Two cat silhouettes</string>
+    <string name="add_reminder_for_your_cat_content_description">Add reminder for your cat</string>
+    <string name="no_reminders_warning">No reminders.\nCreate one!</string>
+    <string name="login_or_sign_up_button">Login or sign up</string>
+</resources>

@@ -13,12 +13,13 @@
         android:layout_height="wrap_content"
         android:text="@string/no_reminders_warning"
         android:textAlignment="center"
-        app:drawableBottomCompat="@drawable/arrow_south_east"
         android:drawablePadding="@dimen/padding_medium"
+        app:drawableBottomCompat="@drawable/arrow_south_east"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
         style="@style/TitleText"/>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -26,7 +27,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:overScrollMode="always"
-        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

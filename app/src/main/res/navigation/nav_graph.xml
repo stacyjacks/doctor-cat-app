@@ -1,10 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/catRemindersListFragment">
 
     <fragment
         android:id="@+id/catRemindersListFragment"
         android:name="kurmakaeva.anastasia.doctorcat.listfragment.CatRemindersListFragment"
-        android:label="CatRemindersListFragment" />
+        android:label="DoctorCat">
+        <action
+            android:id="@+id/action_catRemindersListFragment_to_addCatReminderFragment"
+            app:destination="@id/addCatReminderFragment"
+            app:popUpTo="@id/addCatReminderFragment" />
+        <action
+            android:id="@+id/action_catRemindersListFragment_to_catReminderDetailFragment"
+            app:destination="@id/catReminderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCatReminderFragment"
+        android:name="kurmakaeva.anastasia.doctorcat.addfragment.AddCatReminderFragment"
+        android:label="Add a reminder" >
+        <action
+            android:id="@+id/action_addCatReminderFragment_to_catRemindersListFragment"
+            app:destination="@id/catRemindersListFragment"
+            app:popUpTo="@id/catRemindersListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/catReminderDetailFragment"
+        android:name="kurmakaeva.anastasia.doctorcat.detailfragment.CatReminderDetailFragment"
+        android:label="Detail" />
 </navigation>

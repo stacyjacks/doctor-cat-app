@@ -2,24 +2,24 @@ package kurmakaeva.anastasia.doctorcat.listfragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
+import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.authentication.AuthenticationActivity
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentCatRemindersListBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
-class CatRemindersListFragment: Fragment() {
+class CatRemindersListFragment: Fragment(), SelectableReminder {
 
     private lateinit var binding: FragmentCatRemindersListBinding
+    private lateinit var adapter: CatRemindersListAdapter
+    private val viewModel by viewModel<CatRemindersViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil
-            .inflate(inflater, R.layout.fragment_cat_reminders_list, container,false)
+        binding = FragmentCatRemindersListBinding
+            .inflate(inflater, container,false)
 
         binding.lifecycleOwner = this
 
@@ -28,10 +28,25 @@ class CatRemindersListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.addFAB.setOnClickListener {
-            
+            navigateToAddReminder()
         }
+
+        adapter = CatRemindersListAdapter(this)
+
+        binding.catRemindersListRv.adapter = adapter
+
+        viewModel.loadCatReminders()
+        viewModel.listOfCatReminders.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            adapter.submitList(it)
+        })
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//        inflater.inflate(R.menu.main_menu, menu)
+//    }
 
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        when (item.itemId) {
@@ -43,4 +58,13 @@ class CatRemindersListFragment: Fragment() {
 //        }
 //        return super.onOptionsItemSelected(item)
 //    }
+
+    override fun selectedReminder(position: Int) {
+        TODO("Not yet implemented")
+    }
+
+    private fun navigateToAddReminder() {
+        val action = CatRemindersListFragmentDirections.actionCatRemindersListFragmentToAddCatReminderFragment()
+        this.findNavController().navigate(action)
+    }
 }

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="kurmakaeva.anastasia.doctorcat.listfragment.CatRemindersViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_large">
+
+        <TextView
+            android:id="@+id/reminderTitleDetail"
+            style="@style/TitleText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.singleCatReminder.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Vet visit" />
+
+        <TextView
+            android:id="@+id/catNameDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.singleCatReminder.catName}"
+            style="@style/SubheaderText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reminderTitleDetail"
+            tools:text="Marce" />
+
+        <TextView
+            android:id="@+id/whenDetailLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_large"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/catNameDetail"
+            tools:text="When:" />
+
+        <TextView
+            android:id="@+id/dateDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.singleCatReminder.date}"
+            app:layout_constraintEnd_toStartOf="@+id/atDetail"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/whenDetailLabel"
+            tools:text="21/04/2021" />
+
+        <TextView
+            android:id="@+id/atDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/padding_medium"
+            app:layout_constraintEnd_toStartOf="@+id/timeDetail"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/dateDetail"
+            app:layout_constraintTop_toBottomOf="@id/whenDetailLabel"
+            tools:text="at" />
+
+        <TextView
+            android:id="@+id/timeDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.singleCatReminder.time}"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/atDetail"
+            app:layout_constraintTop_toBottomOf="@id/whenDetailLabel"
+            tools:text="12:00" />
+
+        <TextView
+            android:id="@+id/notesDetailLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/padding_large"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateDetail"
+            tools:text="Notes:" />
+
+        <TextView
+            android:id="@+id/notesDetail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.singleCatReminder.notes}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notesDetailLabel"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

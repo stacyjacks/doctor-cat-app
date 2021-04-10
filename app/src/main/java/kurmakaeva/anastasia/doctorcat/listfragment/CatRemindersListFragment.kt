@@ -40,6 +40,12 @@ class CatRemindersListFragment: Fragment(), SelectableReminder {
         viewModel.loadCatReminders()
         viewModel.listOfCatReminders.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adapter.submitList(it)
+
+            if (viewModel.listOfCatReminders.value == null) { // TODO: esto no va, revisar
+                binding.noRemindersTv.visibility = View.VISIBLE
+            } else {
+                binding.noRemindersTv.visibility = View.GONE
+            }
         })
     }
 
@@ -59,8 +65,9 @@ class CatRemindersListFragment: Fragment(), SelectableReminder {
 //        return super.onOptionsItemSelected(item)
 //    }
 
-    override fun selectedReminder(position: Int) {
-        TODO("Not yet implemented")
+    override fun selectedReminder(reminderId: String) {
+        val action = CatRemindersListFragmentDirections.actionCatRemindersListFragmentToCatReminderDetailFragment(reminderId)
+        this.findNavController().navigate(action)
     }
 
     private fun navigateToAddReminder() {

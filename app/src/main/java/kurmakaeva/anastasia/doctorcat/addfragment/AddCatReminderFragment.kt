@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentAddCatReminderBinding
@@ -23,6 +24,8 @@ class AddCatReminderFragment: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
         binding = FragmentAddCatReminderBinding.inflate(inflater, container, false)
 
@@ -61,7 +64,7 @@ class AddCatReminderFragment: Fragment() {
                 notes = notes,
                 date = date,
                 time = time,
-                image = image
+                image = image,
             )
 
             viewModel.saveReminder(reminderData)

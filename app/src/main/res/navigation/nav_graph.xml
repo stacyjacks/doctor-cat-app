@@ -29,5 +29,9 @@
     <fragment
         android:id="@+id/catReminderDetailFragment"
         android:name="kurmakaeva.anastasia.doctorcat.detailfragment.CatReminderDetailFragment"
-        android:label="Detail" />
+        android:label="Detail" >
+        <argument
+            android:name="reminderId"
+            app:argType="string" />
+    </fragment>
 </navigation>

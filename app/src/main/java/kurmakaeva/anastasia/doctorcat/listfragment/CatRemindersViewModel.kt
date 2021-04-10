@@ -15,6 +15,10 @@ class CatRemindersViewModel(private val repository: RemindersDataSource): ViewMo
     val listOfCatReminders: LiveData<List<ReminderData>>
     get() = _listOfCatReminders
 
+    private val _singleCatReminder = MutableLiveData<ReminderData>()
+    val singleCatReminder: LiveData<ReminderData>
+        get() = _singleCatReminder
+
     fun loadCatReminders() {
         viewModelScope.launch {
             val list = repository.getAllReminders()
@@ -37,5 +41,21 @@ class CatRemindersViewModel(private val repository: RemindersDataSource): ViewMo
 
     fun deleteReminder(reminderData: ReminderData) {
 
+    }
+
+    fun getSingleCatReminder(reminderId: String) {
+        viewModelScope.launch {
+            val reminderDB = repository.getReminder(reminderId)
+            val reminder = ReminderData(
+                reminderDB?.title,
+                reminderDB?.catName,
+                reminderDB?.notes,
+                reminderDB?.date,
+                reminderDB?.time,
+                reminderDB?.image,
+                reminderId
+            )
+            _singleCatReminder.value = reminder
+        }
     }
 }

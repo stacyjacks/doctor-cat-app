@@ -7,7 +7,7 @@ import kurmakaeva.anastasia.doctorcat.databinding.CatReminderViewholderBinding
 import kurmakaeva.anastasia.doctorcat.model.ReminderData
 
 interface SelectableReminder {
-    fun selectedReminder(position: Int)
+    fun selectedReminder(reminderId: String)
 }
 
 class CatRemindersListAdapter(private val selectableReminder: SelectableReminder)
@@ -28,7 +28,7 @@ class CatRemindersListAdapter(private val selectableReminder: SelectableReminder
         }
 
         holder.itemView.setOnClickListener {
-            selectableReminder.selectedReminder(position)
+            selectableReminder.selectedReminder(catReminderItem.id)
         }
     }
 

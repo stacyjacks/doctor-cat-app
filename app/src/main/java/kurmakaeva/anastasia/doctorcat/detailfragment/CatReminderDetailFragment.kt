@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentCatReminderDetailBinding
 import kurmakaeva.anastasia.doctorcat.listfragment.CatRemindersViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel

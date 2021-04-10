@@ -41,10 +41,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/padding_large"
+            android:text="@string/when_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/catNameDetail"
-            tools:text="When:" />
+            app:layout_constraintTop_toBottomOf="@id/catNameDetail" />
 
         <TextView
             android:id="@+id/dateDetail"
@@ -62,11 +62,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/padding_medium"
+            android:text="@string/at_helper"
             app:layout_constraintEnd_toStartOf="@+id/timeDetail"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/dateDetail"
-            app:layout_constraintTop_toBottomOf="@id/whenDetailLabel"
-            tools:text="at" />
+            app:layout_constraintTop_toBottomOf="@id/whenDetailLabel" />
 
         <TextView
             android:id="@+id/timeDetail"
@@ -83,10 +83,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/padding_large"
+            android:text="@string/notes_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dateDetail"
-            tools:text="Notes:" />
+            app:layout_constraintTop_toBottomOf="@id/dateDetail" />
 
         <TextView
             android:id="@+id/notesDetail"

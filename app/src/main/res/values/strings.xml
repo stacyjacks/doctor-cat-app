@@ -8,9 +8,13 @@
     <string name="login_or_sign_up_button">Login or sign up</string>
     <string name="enter_a_title_hint">Enter a title</string>
     <string name="enter_your_cats_name_hint">Enter your cat\'s name</string>
-    <string name="notes">Notes: E.g. Give Starli 1/4 antibiotic tablet before dinner.</string>
+    <string name="notes">Notes: E.g. Give Starli 2/4 antibiotic tablet before dinner.</string>
     <string name="select_date_hint">Select date</string>
     <string name="select_time_hint">Select time</string>
     <string name="upload_a_picture_text">Upload a picture of your cat</string>
+    <string name="missing_notes">-</string>
     <string name="save_button">Save</string>
+    <string name="notes_label">Notes:</string>
+    <string name="when_label">When:</string>
+    <string name="at_helper">at</string>
 </resources>

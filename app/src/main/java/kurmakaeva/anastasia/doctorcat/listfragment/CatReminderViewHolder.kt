@@ -11,7 +11,8 @@ class CatReminderViewHolder(private val binding: CatReminderViewholderBinding)
     fun bind(catReminderItem: ReminderData) {
         binding.apply {
             reminderTitleTextView.text = catReminderItem.title
-            reminderDateTextView.text = catReminderItem.date
+            dateTextView.text = catReminderItem.date
+            timeTextView.text = catReminderItem.time
         }
 
         binding.executePendingBindings()

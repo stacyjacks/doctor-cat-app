@@ -35,6 +35,24 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/cat_reminder_viewholder" />
 
+    <TextView
+        android:id="@+id/catFacts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:padding="@dimen/padding_large"
+        android:background="@drawable/bubble_red"
+        android:textColor="@color/white"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:fadingEdge="horizontal"
+        android:singleLine="true"
+        android:scrollHorizontally="true"
+        tools:text="@string/lorem_ipsum"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/addFAB"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFAB"
         android:layout_width="wrap_content"

@@ -31,5 +31,4 @@ class CatRemindersListAdapter(private val selectableReminder: SelectableReminder
             selectableReminder.selectedReminder(catReminderItem.id)
         }
     }
-
 }

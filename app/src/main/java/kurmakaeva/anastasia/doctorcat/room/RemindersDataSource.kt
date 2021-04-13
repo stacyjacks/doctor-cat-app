@@ -9,5 +9,5 @@ interface RemindersDataSource {
 
     suspend fun getReminder(reminderId: String): CatReminderDTO?
 
-    suspend fun deleteReminder(reminder: CatReminderDTO)
+    suspend fun deleteReminder(reminderId: String)
 }

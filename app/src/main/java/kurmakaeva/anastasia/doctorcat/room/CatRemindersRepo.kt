@@ -22,7 +22,7 @@ class CatRemindersRepo(
         return@withContext remindersDao.getReminderById(reminderId)
     }
 
-    override suspend fun deleteReminder(reminder: CatReminderDTO) = withContext(ioDispatcher) {
-        return@withContext remindersDao.deleteReminder(reminder)
+    override suspend fun deleteReminder(reminderId: String) = withContext(ioDispatcher) {
+        return@withContext remindersDao.deleteReminder(reminderId)
     }
 }

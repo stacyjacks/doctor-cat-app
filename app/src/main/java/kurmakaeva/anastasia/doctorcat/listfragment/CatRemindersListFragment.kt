@@ -4,12 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.firebase.auth.FirebaseAuth
+import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.authentication.AuthenticationActivity
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentCatRemindersListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class CatRemindersListFragment: Fragment(), SelectableReminder {
 
@@ -23,6 +25,8 @@ class CatRemindersListFragment: Fragment(), SelectableReminder {
 
         binding.lifecycleOwner = this
 
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -33,45 +37,68 @@ class CatRemindersListFragment: Fragment(), SelectableReminder {
             navigateToAddReminder()
         }
 
-        adapter = CatRemindersListAdapter(this)
+        binding.catFacts.isSelected = true
+        displayCatFacts()
 
-        binding.catRemindersListRv.adapter = adapter
-
-        viewModel.loadCatReminders()
-        viewModel.listOfCatReminders.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-            adapter.submitList(it)
-
-            if (viewModel.listOfCatReminders.value == null) { // TODO: esto no va, revisar
-                binding.noRemindersTv.visibility = View.VISIBLE
-            } else {
-                binding.noRemindersTv.visibility = View.GONE
-            }
-        })
+        setupAdapter()
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater.inflate(R.menu.main_menu, menu)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_menu, menu)
+    }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when (item.itemId) {
-//            R.id.logout -> {
-//                FirebaseAuth.getInstance().signOut()
-//                val intent = Intent(activity, AuthenticationActivity::class.java)
-//                startActivity(intent)
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logoutButton -> {
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(activity, AuthenticationActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun selectedReminder(reminderId: String) {
         val action = CatRemindersListFragmentDirections.actionCatRemindersListFragmentToCatReminderDetailFragment(reminderId)
         this.findNavController().navigate(action)
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.catFacts.isSelected = true
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.catFacts.isSelected = false
+    }
+
+    private fun setupAdapter() {
+        adapter = CatRemindersListAdapter(this)
+        binding.apply {
+            catRemindersListRv.adapter = adapter
+        }
+
+        val itemTouchHelper = ItemTouchHelper(SwipeToDelete(adapter, viewModel))
+        itemTouchHelper.attachToRecyclerView(binding.catRemindersListRv)
+
+        viewModel.loadCatReminders()
+        viewModel.listOfCatReminders.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            adapter.submitList(it)
+        })
+    }
+
     private fun navigateToAddReminder() {
         val action = CatRemindersListFragmentDirections.actionCatRemindersListFragmentToAddCatReminderFragment()
         this.findNavController().navigate(action)
+    }
+
+    private fun displayCatFacts() {
+        viewModel.getCatFact()
+        viewModel.catFact.observe(viewLifecycleOwner, Observer {
+            binding.catFacts.text = StringBuilder(getString(R.string.cat_fact_label) + it.text)
+        })
     }
 }

@@ -30,8 +30,7 @@ fun EditText.transformIntoDatePicker(context: Context, format: String, minDate: 
             context,
             R.style.CalendarTheme,
             datePickerOnDataSetListener,
-            calendar
-                .get(Calendar.YEAR),
+            calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
@@ -59,8 +58,10 @@ fun EditText.transformIntoTimePicker(context: Context, format: String, minTime: 
 
     setOnClickListener {
         TimePickerDialog(
-            context, timePickerOnDataSetListener, calendar
-                .get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true
+            context,
+            R.style.CalendarTheme,
+            timePickerOnDataSetListener,
+            calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true
         )
             .run {
                 minTime.minute

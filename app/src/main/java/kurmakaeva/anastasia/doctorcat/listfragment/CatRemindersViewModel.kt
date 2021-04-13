@@ -1,6 +1,5 @@
 package kurmakaeva.anastasia.doctorcat.listfragment
 
-import android.provider.Settings.Global.getString
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +10,8 @@ import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.model.CatReminderDTO
 import kurmakaeva.anastasia.doctorcat.model.ReminderData
 import kurmakaeva.anastasia.doctorcat.room.RemindersDataSource
+import kurmakaeva.anastasia.doctorcat.service.CatFactsApiResponse
+import kurmakaeva.anastasia.doctorcat.service.CatFactsApiService
 
 class CatRemindersViewModel(private val repository: RemindersDataSource): ViewModel() {
 
@@ -21,6 +22,10 @@ class CatRemindersViewModel(private val repository: RemindersDataSource): ViewMo
     private val _singleCatReminder = MutableLiveData<ReminderData>()
     val singleCatReminder: LiveData<ReminderData>
         get() = _singleCatReminder
+
+    private val _catFact = MutableLiveData<CatFactsApiResponse>()
+    val catFact: LiveData<CatFactsApiResponse>
+        get() = _catFact
 
     fun loadCatReminders() {
         viewModelScope.launch {
@@ -42,10 +47,6 @@ class CatRemindersViewModel(private val repository: RemindersDataSource): ViewMo
         }
     }
 
-    fun deleteReminder(reminderData: ReminderData) {
-
-    }
-
     fun getSingleCatReminder(reminderId: String) {
         val emptyNotes = App.context?.resources?.getString(R.string.missing_notes)
         viewModelScope.launch {
@@ -60,6 +61,19 @@ class CatRemindersViewModel(private val repository: RemindersDataSource): ViewMo
                 reminderId
             )
             _singleCatReminder.value = reminder
+        }
+    }
+
+    fun deleteReminder(reminderId: String) {
+        viewModelScope.launch {
+            repository.deleteReminder(reminderId)
+        }
+    }
+
+    fun getCatFact() {
+        val catFactsApiService = CatFactsApiService.instance
+        viewModelScope.launch {
+            _catFact.value = catFactsApiService.getCatFact()
         }
     }
 }

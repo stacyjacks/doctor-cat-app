@@ -39,5 +39,6 @@ class CatReminderDetailFragment: Fragment() {
         sharedViewModel.singleCatReminder.observe(viewLifecycleOwner, Observer {
             binding.viewModel = sharedViewModel
         })
+        // sharedViewModel.deleteReminder()
     }
 }

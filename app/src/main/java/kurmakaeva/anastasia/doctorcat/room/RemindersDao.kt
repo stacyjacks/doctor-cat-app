@@ -19,7 +19,7 @@ interface RemindersDao {
     suspend fun saveReminder(reminder: CatReminderDTO)
 
     // Delete a reminder
-    @Delete
-    suspend fun deleteReminder(reminder: CatReminderDTO)
+    @Query("DELETE from reminders where id = :reminderId")
+    suspend fun deleteReminder(reminderId: String)
 
 }

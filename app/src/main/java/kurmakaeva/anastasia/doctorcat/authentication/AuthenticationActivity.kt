@@ -33,6 +33,7 @@ class AuthenticationActivity: AppCompatActivity() {
         val currentUser = FirebaseAuth.getInstance().currentUser
         if ( currentUser != null) {
             startActivity(Intent(this, MainActivity::class.java))
+            this.finish()
         }
     }
 

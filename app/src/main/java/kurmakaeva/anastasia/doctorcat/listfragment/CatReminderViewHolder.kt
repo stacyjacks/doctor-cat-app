@@ -19,16 +19,12 @@ class CatReminderViewHolder(private val binding: CatReminderViewholderBinding)
     }
 
     object DiffCallback: DiffUtil.ItemCallback<ReminderData>() {
-        override fun areItemsTheSame(
-            oldItem: ReminderData,
-            newItem: ReminderData): Boolean {
-            return oldItem.id == newItem.id
+        override fun areItemsTheSame(oldItem: ReminderData, newItem: ReminderData): Boolean {
+            return oldItem == newItem
         }
 
-        override fun areContentsTheSame(
-            oldItem: ReminderData,
-            newItem: ReminderData): Boolean {
-            return oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: ReminderData, newItem: ReminderData): Boolean {
+            return oldItem == newItem
         }
     }
 }

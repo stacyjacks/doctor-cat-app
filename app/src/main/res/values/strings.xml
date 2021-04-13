@@ -17,4 +17,10 @@
     <string name="notes_label">Notes:</string>
     <string name="when_label">When:</string>
     <string name="at_helper">at</string>
+    <string name="logout_button">Logout</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="about_button">About</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="cat_fact_label">"Cat fact:  "</string>
 </resources>

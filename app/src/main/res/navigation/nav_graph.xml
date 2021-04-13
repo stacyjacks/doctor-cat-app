@@ -12,11 +12,11 @@
         <action
             android:id="@+id/action_catRemindersListFragment_to_addCatReminderFragment"
             app:destination="@id/addCatReminderFragment"
-            app:popUpTo="@id/catRemindersListFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_out_right"
-            app:popExitAnim="@anim/slide_in_left" />
+            app:popExitAnim="@anim/slide_in_left"
+            app:popUpTo="@id/catRemindersListFragment" />
         <action
             android:id="@+id/action_catRemindersListFragment_to_catReminderDetailFragment"
             app:destination="@id/catReminderDetailFragment"
@@ -32,7 +32,8 @@
         <action
             android:id="@+id/action_addCatReminderFragment_to_catRemindersListFragment"
             app:destination="@id/catRemindersListFragment"
-            app:popUpTo="@id/catRemindersListFragment" />
+            app:popUpTo="@id/catRemindersListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/catReminderDetailFragment"

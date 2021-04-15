@@ -7,6 +7,10 @@
         <variable
             name="viewModel"
             type="kurmakaeva.anastasia.doctorcat.listfragment.CatRemindersViewModel" />
+
+        <variable
+            name="reminderData"
+            type="kurmakaeva.anastasia.doctorcat.model.ReminderData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

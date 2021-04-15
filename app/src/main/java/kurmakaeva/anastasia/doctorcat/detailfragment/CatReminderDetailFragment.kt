@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
-import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentCatReminderDetailBinding
 import kurmakaeva.anastasia.doctorcat.listfragment.CatRemindersViewModel
+import kurmakaeva.anastasia.doctorcat.model.ReminderData
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import java.lang.Exception
 
 class CatReminderDetailFragment: Fragment() {
 
@@ -25,6 +26,7 @@ class CatReminderDetailFragment: Fragment() {
         binding = FragmentCatReminderDetailBinding.inflate(inflater, container, false)
 
         val args by navArgs<CatReminderDetailFragmentArgs>()
+
         viewModelSetup(args.reminderId)
 
         return binding.root
@@ -39,6 +41,5 @@ class CatReminderDetailFragment: Fragment() {
         sharedViewModel.singleCatReminder.observe(viewLifecycleOwner, Observer {
             binding.viewModel = sharedViewModel
         })
-        // sharedViewModel.deleteReminder()
     }
 }

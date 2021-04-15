@@ -1,5 +1,9 @@
 package kurmakaeva.anastasia.doctorcat.addfragment
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +15,10 @@ import kurmakaeva.anastasia.doctorcat.databinding.FragmentAddCatReminderBinding
 import kurmakaeva.anastasia.doctorcat.model.ReminderData
 import kurmakaeva.anastasia.doctorcat.transformIntoDatePicker
 import kurmakaeva.anastasia.doctorcat.transformIntoTimePicker
+import kurmakaeva.anastasia.doctorcat.utils.AlertReceiver
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalTime
 import java.util.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class AddCatReminderFragment: Fragment() {
@@ -23,7 +28,8 @@ class AddCatReminderFragment: Fragment() {
     private lateinit var reminderData: ReminderData
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View {
 
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
@@ -39,11 +45,13 @@ class AddCatReminderFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val calendar = Calendar.getInstance()
+
         binding.apply {
             selectDateEditText
-                .transformIntoDatePicker(requireContext(), "dd/MM/YYYY", Date())
+                .transformIntoDatePicker(requireContext(), "dd/MM/YYYY", Date(), calendar)
             selectTimeEditText
-                .transformIntoTimePicker(requireContext(), "HH:mm", LocalTime.now())
+                .transformIntoTimePicker(requireContext(), "HH:mm", LocalTime.now(), calendar)
 
             uploadPictureButton.setOnClickListener {
                 // selectImage()
@@ -69,6 +77,8 @@ class AddCatReminderFragment: Fragment() {
 
             viewModel.saveReminder(reminderData)
 
+            setAlarm(calendar)
+
             val action = AddCatReminderFragmentDirections.actionAddCatReminderFragmentToCatRemindersListFragment()
             this.findNavController().navigate(action)
         }
@@ -77,6 +87,21 @@ class AddCatReminderFragment: Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         viewModel.onClear()
+    }
+
+    private fun setAlarm(calendar: Calendar) {
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(requireContext(), AlertReceiver::class.java)
+
+        intent.action = "NOTE_ACTION"
+
+        val bundle = Bundle()
+        bundle.putParcelable("NOTE_DATA", reminderData)
+        intent.putExtra("NOTE_DATA", bundle)
+
+        val pendingIntent = PendingIntent.getBroadcast(requireContext(), 1, intent, 0)
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent)
     }
 
     private fun selectImage() {

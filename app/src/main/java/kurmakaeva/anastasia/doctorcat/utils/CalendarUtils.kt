@@ -3,20 +3,22 @@ package kurmakaeva.anastasia.doctorcat
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
-import android.os.Build
 import android.widget.EditText
-import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 import java.time.LocalTime
 import java.util.*
 
-fun EditText.transformIntoDatePicker(context: Context, format: String, minDate: Date? = null) {
+fun EditText.transformIntoDatePicker(
+    context: Context,
+    format: String,
+    minDate: Date? = null,
+    calendar: Calendar
+) {
     isFocusableInTouchMode = false
     isClickable = true
     isFocusable = false
 
-    val calendar = Calendar.getInstance()
-    val datePickerOnDataSetListener =
+    val datePickerOnDateSetListener =
         DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, monthOfYear)
@@ -29,7 +31,7 @@ fun EditText.transformIntoDatePicker(context: Context, format: String, minDate: 
         DatePickerDialog(
             context,
             R.style.CalendarTheme,
-            datePickerOnDataSetListener,
+            datePickerOnDateSetListener,
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
@@ -41,12 +43,16 @@ fun EditText.transformIntoDatePicker(context: Context, format: String, minDate: 
     }
 }
 
-fun EditText.transformIntoTimePicker(context: Context, format: String, minTime: LocalTime) {
+fun EditText.transformIntoTimePicker(
+    context: Context,
+    format: String,
+    minTime: LocalTime,
+    calendar: Calendar
+) {
     isFocusableInTouchMode = false
     isClickable = true
     isFocusable = false
 
-    val calendar = Calendar.getInstance()
     val timePickerOnDataSetListener =
         TimePickerDialog.OnTimeSetListener { _, hourOfDay, minuteOfHour ->
             calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
@@ -67,6 +73,5 @@ fun EditText.transformIntoTimePicker(context: Context, format: String, minTime: 
                 minTime.minute
                 show()
             }
-
     }
 }

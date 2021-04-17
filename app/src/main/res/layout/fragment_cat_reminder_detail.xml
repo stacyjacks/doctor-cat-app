@@ -23,7 +23,7 @@
             android:text="@{viewModel.singleCatReminder.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/catNameDetail"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Vet visit" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:text="@{viewModel.singleCatReminder.catName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/whenDetailLabel"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Marce" />
 
         <TextView
@@ -45,17 +45,15 @@
             android:text="@string/when_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/dateDetail" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/dateDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.singleCatReminder.date}"
-            app:layout_constraintEnd_toStartOf="@+id/atDetail"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/notesDetailLabel"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="21/04/2021" />
 
         <TextView
@@ -64,19 +62,16 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/padding_medium"
             android:text="@string/at_helper"
-            app:layout_constraintEnd_toStartOf="@+id/timeDetail"
-            app:layout_constraintBottom_toTopOf="@id/notesDetailLabel"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/dateDetail" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/timeDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.singleCatReminder.time}"
-            app:layout_constraintBottom_toTopOf="@id/notesDetailLabel"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/atDetail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="12:00" />
 
         <TextView
@@ -87,7 +82,7 @@
             android:text="@string/notes_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/notesDetail"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/notesDetail"
@@ -95,7 +90,7 @@
             android:layout_height="wrap_content"
             android:text="@{viewModel.singleCatReminder.notes}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>

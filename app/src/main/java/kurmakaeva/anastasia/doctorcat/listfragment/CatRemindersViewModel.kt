@@ -23,8 +23,8 @@ class CatRemindersViewModel(private val repository: RemindersDataSource): ViewMo
     val singleCatReminder: LiveData<ReminderData>
         get() = _singleCatReminder
 
-    private val _catFact = MutableLiveData<CatFactsApiResponse>()
-    val catFact: LiveData<CatFactsApiResponse>
+    private val _catFact = MutableLiveData<String>()
+    val catFact: LiveData<String>
         get() = _catFact
 
     fun loadCatReminders() {
@@ -73,7 +73,8 @@ class CatRemindersViewModel(private val repository: RemindersDataSource): ViewMo
     fun getCatFact() {
         val catFactsApiService = CatFactsApiService.instance
         viewModelScope.launch {
-            _catFact.value = catFactsApiService.getCatFact()
+            val catFactFromNetwork = catFactsApiService.getCatFact()
+            _catFact.value = catFactFromNetwork.text
         }
     }
 }

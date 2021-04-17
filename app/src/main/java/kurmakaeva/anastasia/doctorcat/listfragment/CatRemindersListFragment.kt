@@ -13,7 +13,6 @@ import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.authentication.AuthenticationActivity
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentCatRemindersListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 class CatRemindersListFragment: Fragment(), SelectableReminder {
 
@@ -103,7 +102,7 @@ class CatRemindersListFragment: Fragment(), SelectableReminder {
     private fun displayCatFacts() {
         viewModel.getCatFact()
         viewModel.catFact.observe(viewLifecycleOwner, Observer {
-            binding.catFacts.text = StringBuilder(getString(R.string.cat_fact_label) + it.text)
+            binding.catFacts.text = StringBuilder(getString(R.string.cat_fact_label) + it)
         })
     }
 

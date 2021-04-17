@@ -8,7 +8,8 @@
         motion:autoTransition="animateToEnd"
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="600">
+        motion:motionInterpolator="easeInOut"
+        motion:duration="300">
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -20,7 +21,7 @@
             android:alpha="0"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toTopOf="@id/catNameDetail"
+            motion:layout_constraintTop_toTopOf="parent"
             tools:text="Vet visit" />
 
         <Constraint
@@ -29,9 +30,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:alpha="0"
-            motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toTopOf="@id/whenDetailLabel"
+            motion:layout_constraintTop_toTopOf="parent"
             tools:text="Marce" />
 
         <Constraint
@@ -43,17 +43,15 @@
             android:text="@string/when_label"
             android:textStyle="bold"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toTopOf="@id/dateDetail" />
+            motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@+id/dateDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0"
-            motion:layout_constraintEnd_toStartOf="@+id/atDetail"
-            motion:layout_constraintHorizontal_bias="0.5"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toTopOf="@id/notesDetailLabel"
+            motion:layout_constraintTop_toTopOf="parent"
             tools:text="21/04/2021" />
 
         <Constraint
@@ -63,19 +61,18 @@
             android:alpha="0"
             android:paddingHorizontal="@dimen/padding_medium"
             android:text="@string/at_helper"
-            motion:layout_constraintBottom_toTopOf="@id/notesDetailLabel"
-            motion:layout_constraintEnd_toStartOf="@+id/timeDetail"
-            motion:layout_constraintHorizontal_bias="0.5"
-            motion:layout_constraintStart_toEndOf="@+id/dateDetail" />
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintHorizontal_bias="0.5" />
 
         <Constraint
             android:id="@+id/timeDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0"
-            motion:layout_constraintBottom_toTopOf="@id/notesDetailLabel"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintHorizontal_bias="0.5"
-            motion:layout_constraintStart_toEndOf="@+id/atDetail"
             tools:text="12:00" />
 
         <Constraint
@@ -87,7 +84,7 @@
             android:text="@string/notes_label"
             android:textStyle="bold"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toTopOf="@id/notesDetail"/>
+            motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@+id/notesDetail"
@@ -95,8 +92,8 @@
             android:layout_height="wrap_content"
             android:alpha="0"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            tools:text="" />
+            motion:layout_constraintTop_toTopOf="parent"
+            tools:text="-" />
 
     </ConstraintSet>
 

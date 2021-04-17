@@ -9,9 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentCatReminderDetailBinding
 import kurmakaeva.anastasia.doctorcat.listfragment.CatRemindersViewModel
-import kurmakaeva.anastasia.doctorcat.model.ReminderData
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.lang.Exception
 
 class CatReminderDetailFragment: Fragment() {
 

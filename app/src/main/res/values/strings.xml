@@ -23,4 +23,8 @@
     <string name="about_button">About</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="cat_fact_label">"Cat fact:  "</string>
+    <string name="success_reminder_set">Your reminder has been saved.</string>
+    <string name="error_set_date_time">You need to set a correct date and time</string>
+    <string name="error_set_title">Please set title for your reminder</string>
+    <string name="error_set_cat_name">Please enter your cat\'s name</string>
 </resources>

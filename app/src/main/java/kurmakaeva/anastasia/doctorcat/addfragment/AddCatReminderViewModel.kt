@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.model.CatReminderDTO
 import kurmakaeva.anastasia.doctorcat.model.ReminderData
 import kurmakaeva.anastasia.doctorcat.room.RemindersDataSource
@@ -16,6 +17,9 @@ class AddCatReminderViewModel(private val repository: RemindersDataSource): View
     val date = MutableLiveData<String>()
     val time = MutableLiveData<String>()
     val image = MutableLiveData<String>()
+
+    val showSnackbarInt = MutableLiveData<Int>()
+    val showSnackbar = MutableLiveData<String>()
 
     fun onClear() {
         title.value = null
@@ -42,7 +46,21 @@ class AddCatReminderViewModel(private val repository: RemindersDataSource): View
         }
     }
 
-    fun validateDataIsEntered() {
+    fun validateDataIsEntered(reminderData: ReminderData): Boolean {
+        if (reminderData.title.isNullOrEmpty()) {
+            showSnackbarInt.value = R.string.error_set_title
+            return false
+        }
 
+        if (reminderData.catName.isNullOrEmpty()) {
+            showSnackbarInt.value = R.string.error_set_cat_name
+            return false
+        }
+
+        if (reminderData.date.isNullOrEmpty() or reminderData.time.isNullOrEmpty()) {
+            showSnackbarInt.value = R.string.error_set_date_time
+            return false
+        }
+        return true
     }
 }

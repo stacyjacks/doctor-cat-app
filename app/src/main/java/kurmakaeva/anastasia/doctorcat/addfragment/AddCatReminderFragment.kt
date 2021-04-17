@@ -9,8 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentAddCatReminderBinding
 import kurmakaeva.anastasia.doctorcat.model.ReminderData
 import kurmakaeva.anastasia.doctorcat.transformIntoDatePicker
@@ -20,7 +23,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.time.LocalTime
 import java.util.*
 
-
 class AddCatReminderFragment: Fragment() {
 
     private lateinit var binding: FragmentAddCatReminderBinding
@@ -28,8 +30,7 @@ class AddCatReminderFragment: Fragment() {
     private lateinit var reminderData: ReminderData
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
@@ -75,13 +76,28 @@ class AddCatReminderFragment: Fragment() {
                 image = image,
             )
 
-            viewModel.saveReminder(reminderData)
+            if (viewModel.validateDataIsEntered(reminderData)) {
+                viewModel.saveReminder(reminderData)
+                
+                setAlarm(calendar)
+                showSuccessToast()
 
-            setAlarm(calendar)
-
-            val action = AddCatReminderFragmentDirections.actionAddCatReminderFragmentToCatRemindersListFragment()
-            this.findNavController().navigate(action)
+                val action = AddCatReminderFragmentDirections.actionAddCatReminderFragmentToCatRemindersListFragment()
+                this.findNavController().navigate(action)
+            }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.showSnackbar.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
+        })
+
+        viewModel.showSnackbarInt.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            Snackbar.make(requireView(), getString(it), Snackbar.LENGTH_LONG).show()
+        })
     }
 
     override fun onDestroy() {
@@ -99,9 +115,15 @@ class AddCatReminderFragment: Fragment() {
         bundle.putParcelable("NOTE_DATA", reminderData)
         intent.putExtra("NOTE_DATA", bundle)
 
-        val pendingIntent = PendingIntent.getBroadcast(requireContext(), 1, intent, 0)
+        val pendingIntent = PendingIntent.getBroadcast(requireContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent)
+    }
+
+    private fun showSuccessToast() {
+        Toast
+            .makeText(requireContext(), getString(R.string.success_reminder_set), Toast.LENGTH_LONG)
+            .show()
     }
 
     private fun selectImage() {

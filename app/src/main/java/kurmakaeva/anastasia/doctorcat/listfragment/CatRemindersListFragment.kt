@@ -3,6 +3,7 @@ package kurmakaeva.anastasia.doctorcat.listfragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.authentication.AuthenticationActivity
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentCatRemindersListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class CatRemindersListFragment: Fragment(), SelectableReminder {
 
@@ -55,6 +57,9 @@ class CatRemindersListFragment: Fragment(), SelectableReminder {
                 val intent = Intent(activity, AuthenticationActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
+            }
+            R.id.aboutButton -> {
+                showAboutInfo()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -100,5 +105,14 @@ class CatRemindersListFragment: Fragment(), SelectableReminder {
         viewModel.catFact.observe(viewLifecycleOwner, Observer {
             binding.catFacts.text = StringBuilder(getString(R.string.cat_fact_label) + it.text)
         })
+    }
+
+    private fun showAboutInfo() {
+        val dialogTitle = getString(R.string.about_menu_title)
+        val dialogMessage = getString(R.string.about_text)
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(dialogTitle)
+        builder.setMessage(dialogMessage)
+        builder.create().show()
     }
 }

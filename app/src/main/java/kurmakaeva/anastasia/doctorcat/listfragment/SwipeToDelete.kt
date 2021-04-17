@@ -41,7 +41,7 @@ class SwipeToDelete(private val adapter: CatRemindersListAdapter,
     }
 
     override fun onChildDraw(
-        c: Canvas,
+        canvas: Canvas,
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
         dX: Float,
@@ -51,7 +51,7 @@ class SwipeToDelete(private val adapter: CatRemindersListAdapter,
     ) {
 
         super.onChildDraw(
-            c,
+            canvas,
             recyclerView,
             viewHolder,
             dX,
@@ -65,49 +65,58 @@ class SwipeToDelete(private val adapter: CatRemindersListAdapter,
 
         val itemView = viewHolder.itemView
         val backgroundCornerOffset = 20
-        if (dX > 0) {
-            background.setBounds(
-                itemView.left,
-                itemView.top,
-                itemView.left + dX.toInt() + backgroundCornerOffset,
-                itemView.bottom
-            )
-        } else if (dX < 0) { // Swiping to the left
-            background.setBounds(
-                itemView.right + dX.toInt() - backgroundCornerOffset,
-                itemView.top, itemView.right, itemView.bottom
-            )
-        } else { // view is unSwiped
-            background.setBounds(0, 0, 0, 0)
+        when {
+            dX > 0 -> {
+                background.setBounds(
+                    itemView.left,
+                    itemView.top,
+                    itemView.left + dX.toInt() + backgroundCornerOffset,
+                    itemView.bottom
+                )
+            }
+            dX < 0 -> { // Swiping to the left
+                background.setBounds(
+                    itemView.right + dX.toInt() - backgroundCornerOffset,
+                    itemView.top, itemView.right, itemView.bottom
+                )
+            }
+            else -> { // view is unSwiped
+                background.setBounds(0, 0, 0, 0)
+            }
         }
 
         val iconMargin = (itemView.height - deleteIcon.intrinsicHeight) / 2
         val iconTop = itemView.top + (itemView.height - deleteIcon.intrinsicHeight) / 2
         val iconBottom = iconTop + deleteIcon.intrinsicHeight
-        if (dX > 0) { // Swiping to the right
-            val iconLeft = itemView.left + iconMargin + deleteIcon.intrinsicWidth
-            val iconRight = itemView.left + iconMargin
-            deleteIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
-            background.setBounds(
-                itemView.left,
-                itemView.top,
-                itemView.left + dX.toInt() + backgroundCornerOffset,
-                itemView.bottom
-            )
-        } else if (dX < 0) { // Swiping to the left
-            val iconLeft = itemView.right - iconMargin - deleteIcon.intrinsicWidth
-            val iconRight = itemView.right - iconMargin
-            deleteIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
-            background.setBounds(
-                (itemView.right + dX.toInt()) - backgroundCornerOffset,
-                itemView.top,
-                itemView.right,
-                itemView.bottom
-            )
-        } else {
-            background.setBounds(0, 0, 0, 0)
+        when {
+            dX > 0 -> { // Swiping to the right
+                val iconLeft = itemView.left + iconMargin + deleteIcon.intrinsicWidth
+                val iconRight = itemView.left + iconMargin
+                deleteIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                background.setBounds(
+                    itemView.left,
+                    itemView.top,
+                    itemView.left + dX.toInt() + backgroundCornerOffset,
+                    itemView.bottom
+                )
+            }
+            dX < 0 -> { // Swiping to the left
+                val iconLeft = itemView.right - iconMargin - deleteIcon.intrinsicWidth
+                val iconRight = itemView.right - iconMargin
+                deleteIcon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
+                background.setBounds(
+                    (itemView.right + dX.toInt()) - backgroundCornerOffset,
+                    itemView.top,
+                    itemView.right,
+                    itemView.bottom
+                )
+            }
+            else -> {
+                background.setBounds(0, 0, 0, 0)
+            }
         }
-        background.draw(c)
-        deleteIcon.draw(c)
+
+        background.draw(canvas)
+        deleteIcon.draw(canvas)
     }
 }

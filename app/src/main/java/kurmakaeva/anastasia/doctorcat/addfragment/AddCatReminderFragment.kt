@@ -78,7 +78,7 @@ class AddCatReminderFragment: Fragment() {
 
             if (viewModel.validateDataIsEntered(reminderData)) {
                 viewModel.saveReminder(reminderData)
-                
+
                 setAlarm(calendar)
                 showSuccessToast()
 

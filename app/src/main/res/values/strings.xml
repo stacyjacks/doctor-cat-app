@@ -27,4 +27,6 @@
     <string name="error_set_date_time">You need to set a correct date and time</string>
     <string name="error_set_title">Please set title for your reminder</string>
     <string name="error_set_cat_name">Please enter your cat\'s name</string>
+    <string name="about_menu_title">About DoctorCat</string>
+    <string name="about_text">Developed by Anastasia Kurmakaeva.\nCat icons made by Freepik.com</string>
 </resources>

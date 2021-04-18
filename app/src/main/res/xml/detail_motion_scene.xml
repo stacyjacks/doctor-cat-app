@@ -9,7 +9,7 @@
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:motionInterpolator="easeInOut"
-        motion:duration="300">
+        motion:duration="400">
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -94,6 +94,15 @@
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
             tools:text="-" />
+
+        <Constraint
+            android:id="@+id/catPicture"
+            android:layout_width="@dimen/image_detail_size"
+            android:layout_height="@dimen/image_detail_size"
+            android:alpha="0"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_paw"/>
 
     </ConstraintSet>
 
@@ -187,7 +196,16 @@
             android:alpha="1"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/notesDetailLabel"
-            tools:text="" />
+            tools:text="-" />
+
+        <Constraint
+            android:id="@+id/catPicture"
+            android:layout_width="@dimen/image_detail_size"
+            android:layout_height="@dimen/image_detail_size"
+            android:alpha="1"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_paw"/>
 
     </ConstraintSet>
 

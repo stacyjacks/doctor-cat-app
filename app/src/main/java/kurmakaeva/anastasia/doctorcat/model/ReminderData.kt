@@ -11,6 +11,6 @@ data class ReminderData(
     val notes: String?,
     val date: String?,
     val time: String?,
-    val image: String?,
+    var image: String?,
     val id: String = UUID.randomUUID().toString()
 ): Parcelable

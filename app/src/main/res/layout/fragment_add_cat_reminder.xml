@@ -67,17 +67,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/selectTimeEditText" />
 
-        <TextView
-            android:id="@+id/uploadPictureButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/upload_pic"
-            android:drawablePadding="@dimen/padding_small"
-            android:text="@string/upload_a_picture_text"
+        <ImageView
+            android:id="@+id/uploadPicture"
+            android:layout_width="@dimen/image_upload_size"
+            android:layout_height="@dimen/image_upload_size"
+            android:contentDescription="@string/upload_a_picture_text"
+            app:layout_constraintBottom_toTopOf="@id/saveButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/selectTimeEditText"
-            app:layout_constraintBottom_toTopOf="@id/saveButton"/>
+            app:srcCompat="@drawable/upload_pic" />
+
+        <TextView
+            android:id="@+id/uploadPictureFeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/margin_medium"
+            android:text="@string/upload_a_picture_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/uploadPicture"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/saveButton"

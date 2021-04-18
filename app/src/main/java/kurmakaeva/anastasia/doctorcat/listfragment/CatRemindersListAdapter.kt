@@ -1,5 +1,6 @@
 package kurmakaeva.anastasia.doctorcat.listfragment
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -10,14 +11,14 @@ interface SelectableReminder {
     fun selectedReminder(reminderId: String)
 }
 
-class CatRemindersListAdapter(private val selectableReminder: SelectableReminder)
+class CatRemindersListAdapter(private val context: Context, private val selectableReminder: SelectableReminder)
     : ListAdapter<ReminderData, CatReminderViewHolder>(CatReminderViewHolder.DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatReminderViewHolder {
         val binding = CatReminderViewholderBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return CatReminderViewHolder(binding)
+        return CatReminderViewHolder(context, binding)
     }
 
     override fun onBindViewHolder(holder: CatReminderViewHolder, position: Int) {

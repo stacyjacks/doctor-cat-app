@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.Target
+import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentCatReminderDetailBinding
 import kurmakaeva.anastasia.doctorcat.listfragment.CatRemindersViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -37,7 +40,15 @@ class CatReminderDetailFragment: Fragment() {
     private fun viewModelSetup(arguments: String) {
         sharedViewModel.getSingleCatReminder(arguments)
         sharedViewModel.singleCatReminder.observe(viewLifecycleOwner, Observer {
+            val catPictureUri = it.image
             binding.viewModel = sharedViewModel
+
+            Glide.with(this)
+                .load(catPictureUri)
+                .override(150, Target.SIZE_ORIGINAL)
+                .circleCrop()
+                .placeholder(R.drawable.ic_paw)
+                .into(binding.catPicture)
         })
     }
 }

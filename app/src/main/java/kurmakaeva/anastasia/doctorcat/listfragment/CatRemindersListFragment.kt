@@ -80,7 +80,7 @@ class CatRemindersListFragment: Fragment(), SelectableReminder {
     }
 
     private fun setupAdapter() {
-        adapter = CatRemindersListAdapter(this)
+        adapter = CatRemindersListAdapter(requireContext(), this)
         binding.apply {
             catRemindersListRv.adapter = adapter
         }

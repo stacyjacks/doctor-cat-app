@@ -91,7 +91,16 @@
             android:text="@{viewModel.singleCatReminder.notes}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="" />
+            tools:text="-" />
+
+        <ImageView
+            android:id="@+id/catPicture"
+            android:layout_width="@dimen/image_detail_size"
+            android:layout_height="@dimen/image_detail_size"
+            android:contentDescription="@string/cat_picture_content_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_paw"/>
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

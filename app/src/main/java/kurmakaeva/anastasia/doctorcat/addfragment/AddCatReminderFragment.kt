@@ -1,10 +1,14 @@
 package kurmakaeva.anastasia.doctorcat.addfragment
 
+import android.app.Activity.RESULT_OK
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +16,10 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.snackbar.Snackbar
 import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.databinding.FragmentAddCatReminderBinding
@@ -26,11 +34,17 @@ import java.util.*
 class AddCatReminderFragment: Fragment() {
 
     private lateinit var binding: FragmentAddCatReminderBinding
-    private val viewModel by viewModel<AddCatReminderViewModel>()
     private lateinit var reminderData: ReminderData
+    private lateinit var imageUri: String
+
+    private val viewModel by viewModel<AddCatReminderViewModel>()
+    private val SELECT_IMAGE = 500
+    private val TAG_ADD = "TAG_ADD"
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?): View {
 
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
 
@@ -54,8 +68,8 @@ class AddCatReminderFragment: Fragment() {
             selectTimeEditText
                 .transformIntoTimePicker(requireContext(), "HH:mm", LocalTime.now(), calendar)
 
-            uploadPictureButton.setOnClickListener {
-                // selectImage()
+            uploadPicture.setOnClickListener {
+                selectImageFromGallery()
             }
         }
 
@@ -75,6 +89,8 @@ class AddCatReminderFragment: Fragment() {
                 time = time,
                 image = image,
             )
+
+            reminderData.image = imageUri
 
             if (viewModel.validateDataIsEntered(reminderData)) {
                 viewModel.saveReminder(reminderData)
@@ -105,6 +121,15 @@ class AddCatReminderFragment: Fragment() {
         viewModel.onClear()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.i(TAG_ADD, "onActivityResultCalled")
+        if (resultCode == RESULT_OK && requestCode == SELECT_IMAGE) {
+            imageUri = data?.data.toString()
+            onImageSelected()
+        }
+    }
+
     private fun setAlarm(calendar: Calendar) {
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(requireContext(), AlertReceiver::class.java)
@@ -115,7 +140,12 @@ class AddCatReminderFragment: Fragment() {
         bundle.putParcelable("NOTE_DATA", reminderData)
         intent.putExtra("NOTE_DATA", bundle)
 
-        val pendingIntent = PendingIntent.getBroadcast(requireContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(),
+            SystemClock.uptimeMillis().toInt(),
+            intent,
+            0
+        )
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent)
     }
@@ -126,7 +156,22 @@ class AddCatReminderFragment: Fragment() {
             .show()
     }
 
-    private fun selectImage() {
+    private fun selectImageFromGallery() {
+        val gallery = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI)
+        startActivityForResult(gallery, SELECT_IMAGE)
+    }
 
+    private fun onImageSelected() {
+        val requestOptions = RequestOptions()
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .override(150, Target.SIZE_ORIGINAL)
+            .circleCrop()
+
+        Glide.with(this)
+            .load(imageUri)
+            .apply(requestOptions)
+            .into(binding.uploadPicture)
+
+        binding.uploadPictureFeedback.text = getString(R.string.success_picture_set)
     }
 }

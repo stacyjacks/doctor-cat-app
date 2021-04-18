@@ -51,13 +51,14 @@
 
         <ImageView
             android:id="@+id/catImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/padding_small"
-            android:paddingEnd="@dimen/padding_small"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="@dimen/thumbnail_size"
+            android:layout_height="@dimen/thumbnail_size"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:paddingHorizontal="@dimen/padding_medium"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_paw" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

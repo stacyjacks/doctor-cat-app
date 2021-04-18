@@ -29,4 +29,6 @@
     <string name="error_set_cat_name">Please enter your cat\'s name</string>
     <string name="about_menu_title">About DoctorCat</string>
     <string name="about_text">Developed by Anastasia Kurmakaeva.\nCat icons made by Freepik.com</string>
+    <string name="cat_picture_content_description">Your good boy or girl</string>
+    <string name="success_picture_set">Done!</string>
 </resources>

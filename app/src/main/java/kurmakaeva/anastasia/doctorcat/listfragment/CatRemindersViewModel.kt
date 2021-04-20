@@ -10,7 +10,6 @@ import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.model.CatReminderDTO
 import kurmakaeva.anastasia.doctorcat.model.ReminderData
 import kurmakaeva.anastasia.doctorcat.room.RemindersDataSource
-import kurmakaeva.anastasia.doctorcat.service.CatFactsApiResponse
 import kurmakaeva.anastasia.doctorcat.service.CatFactsApiService
 
 class CatRemindersViewModel(private val repository: RemindersDataSource): ViewModel() {
@@ -26,6 +25,10 @@ class CatRemindersViewModel(private val repository: RemindersDataSource): ViewMo
     private val _catFact = MutableLiveData<String>()
     val catFact: LiveData<String>
         get() = _catFact
+
+    private val _missingNetworkEvent = MutableLiveData<Boolean>()
+    val missingNetworkEvent: LiveData<Boolean>
+    get() = _missingNetworkEvent
 
     fun loadCatReminders() {
         viewModelScope.launch {
@@ -73,8 +76,12 @@ class CatRemindersViewModel(private val repository: RemindersDataSource): ViewMo
     fun getCatFact() {
         val catFactsApiService = CatFactsApiService.instance
         viewModelScope.launch {
-            val catFactFromNetwork = catFactsApiService.getCatFact()
-            _catFact.value = catFactFromNetwork.text
+            try {
+                val catFactFromNetwork = catFactsApiService.getCatFact()
+                _catFact.value = catFactFromNetwork.text
+            } catch (e: Exception) {
+                _missingNetworkEvent.value = true
+            }
         }
     }
 }

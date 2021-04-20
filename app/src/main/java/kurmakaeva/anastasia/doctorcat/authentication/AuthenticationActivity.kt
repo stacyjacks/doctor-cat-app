@@ -14,6 +14,7 @@ import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.databinding.ActivityAuthenticationBinding
 
 class AuthenticationActivity: AppCompatActivity() {
+
     companion object {
         const val TAG = "AuthenticationActivity"
         const val SIGN_IN_RESULT_CODE = 1001
@@ -31,7 +32,7 @@ class AuthenticationActivity: AppCompatActivity() {
         }
 
         val currentUser = FirebaseAuth.getInstance().currentUser
-        if ( currentUser != null) {
+        if (currentUser != null) {
             startActivity(Intent(this, MainActivity::class.java))
             this.finish()
         }
@@ -42,9 +43,9 @@ class AuthenticationActivity: AppCompatActivity() {
             AuthUI.IdpConfig.EmailBuilder().build(), AuthUI.IdpConfig.GoogleBuilder().build()
         )
 
-        startActivityForResult(
-            AuthUI.getInstance()
+        startActivityForResult(AuthUI.getInstance()
             .createSignInIntentBuilder()
+            .setTheme(R.style.Theme_DoctorCat)
             .setAvailableProviders(providers)
             .build(),
             SIGN_IN_RESULT_CODE

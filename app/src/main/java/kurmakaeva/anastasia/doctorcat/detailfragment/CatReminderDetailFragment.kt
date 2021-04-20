@@ -25,30 +25,25 @@ class CatReminderDetailFragment: Fragment() {
         savedInstanceState: Bundle?): View {
 
         binding = FragmentCatReminderDetailBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = sharedViewModel
 
-        val args by navArgs<CatReminderDetailFragmentArgs>()
-
-        viewModelSetup(args.reminderId)
+        sharedViewModel.singleCatReminder.observe(viewLifecycleOwner, Observer {
+            Glide.with(this)
+                .load(it.image)
+                .override(150, Target.SIZE_ORIGINAL)
+                .circleCrop()
+                .placeholder(R.drawable.ic_paw)
+                .into(binding.catPicture)
+        })
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    }
 
-    private fun viewModelSetup(arguments: String) {
-        sharedViewModel.getSingleCatReminder(arguments)
-        sharedViewModel.singleCatReminder.observe(viewLifecycleOwner, Observer {
-            val catPictureUri = it.image
-            binding.viewModel = sharedViewModel
-
-            Glide.with(this)
-                .load(catPictureUri)
-                .override(150, Target.SIZE_ORIGINAL)
-                .circleCrop()
-                .placeholder(R.drawable.ic_paw)
-                .into(binding.catPicture)
-        })
+        val args by navArgs<CatReminderDetailFragmentArgs>()
+        sharedViewModel.getSingleCatReminder(args.reminderId)
     }
 }

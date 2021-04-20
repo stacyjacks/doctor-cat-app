@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import kurmakaeva.anastasia.doctorcat.R
 import kurmakaeva.anastasia.doctorcat.authentication.AuthenticationActivity
@@ -91,6 +92,9 @@ class CatRemindersListFragment: Fragment(), SelectableReminder {
         viewModel.loadCatReminders()
         viewModel.listOfCatReminders.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adapter.submitList(it)
+            if (it.isNullOrEmpty()) {
+                binding.noRemindersTv.visibility = View.VISIBLE
+            }
         })
     }
 
@@ -103,6 +107,12 @@ class CatRemindersListFragment: Fragment(), SelectableReminder {
         viewModel.getCatFact()
         viewModel.catFact.observe(viewLifecycleOwner, Observer {
             binding.catFacts.text = StringBuilder(getString(R.string.cat_fact_label) + it)
+        })
+
+        viewModel.missingNetworkEvent.observe(viewLifecycleOwner, Observer {
+            if (it == true) {
+                binding.catFacts.text = getString(R.string.something_went_wrong)
+            }
         })
     }
 

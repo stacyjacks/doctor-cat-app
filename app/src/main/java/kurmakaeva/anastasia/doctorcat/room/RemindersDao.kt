@@ -7,7 +7,7 @@ import kurmakaeva.anastasia.doctorcat.model.CatReminderDTO
 interface RemindersDao {
     // List all reminders
 
-    @Query("SELECT * FROM reminders ORDER BY date ASC")
+    @Query("SELECT * FROM reminders ORDER BY date ASC, time ASC")
     suspend fun getAllReminders(): List<CatReminderDTO>
 
     // Get reminders by its ID

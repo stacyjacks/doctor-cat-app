@@ -31,4 +31,5 @@
     <string name="about_text">Developed by Anastasia Kurmakaeva.\nCat icons made by Freepik.com</string>
     <string name="cat_picture_content_description">Your good boy or girl</string>
     <string name="success_picture_set">Done!</string>
+    <string name="something_went_wrong">Something went wrong and a fun cat could not be loaded.</string>
 </resources>

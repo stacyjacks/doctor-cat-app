@@ -3,59 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
+        app:layoutDescription="@xml/authentication_motion_scene"
         tools:context=".authentication.AuthenticationActivity">
 
         <TextView
             android:id="@+id/welcomeHelpIsHere"
+            style="@style/TitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingVertical="16dp"
+            android:paddingVertical="@dimen/padding_large"
+            android:layout_margin="@dimen/margin_large"
             android:text="@string/login_screen_welcome_text"
             android:textAlignment="center"
-            style="@style/TitleText"
-            app:layout_constraintBottom_toTopOf="@id/twoBlackCatsImage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/twoBlackCatsImage"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/blackCatOneImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:adjustViewBounds="true"
-            android:src="@drawable/two_black_cats"
             android:contentDescription="@string/two_cat_silhouettes_content_description"
-            app:layout_constraintTop_toBottomOf="@id/welcomeHelpIsHere"
-            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/black_cat_one"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcomeHelpIsHere"
+            app:layout_constraintBottom_toTopOf="@id/welcomeProvideYourCat"/>
+
+        <ImageView
+            android:id="@+id/blackCatTwoImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:paddingBottom="@dimen/padding_large"
+            android:contentDescription="@string/two_cat_silhouettes_content_description"
+            android:src="@drawable/black_cat_two"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcomeHelpIsHere"
             app:layout_constraintBottom_toTopOf="@id/welcomeProvideYourCat"/>
 
         <TextView
             android:id="@+id/welcomeProvideYourCat"
+            style="@style/TitleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="16dp"
             android:text="@string/welcome_screen_provide_your_cat_text"
             android:textAlignment="center"
-            style="@style/TitleText"
-            app:layout_constraintTop_toBottomOf="@id/twoBlackCatsImage"
+            app:layout_constraintBottom_toTopOf="@id/loginButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/loginButton" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_large"
             android:text="@string/login_or_sign_up_button"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </layout>

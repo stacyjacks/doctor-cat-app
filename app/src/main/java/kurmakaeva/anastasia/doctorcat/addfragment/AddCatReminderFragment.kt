@@ -35,7 +35,7 @@ class AddCatReminderFragment: Fragment() {
 
     private lateinit var binding: FragmentAddCatReminderBinding
     private lateinit var reminderData: ReminderData
-    private lateinit var imageUri: String
+    private var imageUri: String? = null
 
     private val viewModel by viewModel<AddCatReminderViewModel>()
     private val SELECT_IMAGE = 500
@@ -51,7 +51,6 @@ class AddCatReminderFragment: Fragment() {
         binding = FragmentAddCatReminderBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this
-
         binding.viewModel = viewModel
 
         return binding.root
@@ -90,7 +89,9 @@ class AddCatReminderFragment: Fragment() {
                 image = image,
             )
 
-            reminderData.image = imageUri
+            if (imageUri != null) {
+                reminderData.image = imageUri
+            }
 
             if (viewModel.validateDataIsEntered(reminderData)) {
                 viewModel.saveReminder(reminderData)

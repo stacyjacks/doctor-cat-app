@@ -9,10 +9,9 @@
             type="kurmakaeva.anastasia.doctorcat.listfragment.CatRemindersViewModel" />
     </data>
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutDescription="@xml/detail_motion_scene"
         android:layout_margin="@dimen/padding_large">
 
         <TextView
@@ -24,6 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/catNameDetail"
             tools:text="Vet visit" />
 
         <TextView
@@ -34,7 +34,8 @@
             android:text="@{viewModel.singleCatReminder.catName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reminderTitleDetail"
+            app:layout_constraintBottom_toTopOf="@id/whenDetailLabel"
             tools:text="Marce" />
 
         <TextView
@@ -45,15 +46,19 @@
             android:text="@string/when_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/dateDetail"
+            app:layout_constraintTop_toBottomOf="@id/catNameDetail" />
 
         <TextView
             android:id="@+id/dateDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.singleCatReminder.date}"
+            app:layout_constraintEnd_toStartOf="@+id/atDetail"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/whenDetailLabel"
+            app:layout_constraintBottom_toTopOf="@id/notesDetailLabel"
             tools:text="21/04/2021" />
 
         <TextView
@@ -62,16 +67,19 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/padding_medium"
             android:text="@string/at_helper"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/whenDetailLabel"
+            app:layout_constraintEnd_toStartOf="@+id/timeDetail"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/dateDetail" />
 
         <TextView
             android:id="@+id/timeDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.singleCatReminder.time}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/whenDetailLabel"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/atDetail"
             tools:text="12:00" />
 
         <TextView
@@ -82,7 +90,8 @@
             android:text="@string/notes_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/dateDetail"
+            app:layout_constraintBottom_toTopOf="@id/notesDetail"/>
 
         <TextView
             android:id="@+id/notesDetail"
@@ -90,7 +99,7 @@
             android:layout_height="wrap_content"
             android:text="@{viewModel.singleCatReminder.notes}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/notesDetailLabel"
             tools:text="-" />
 
         <ImageView
@@ -102,5 +111,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_paw"/>
 
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

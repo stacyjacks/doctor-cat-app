@@ -17,11 +17,13 @@ If your cat is sick, and you need to take them to the vet, or to administer medi
 
 Or, if your feline has special dietary needs throughout the day, you can also set reminders for when they need to be given X or Y foods.
 
-Additionally, to make this app a little bit more dynamic, the user is provided with unlimited cat facts, which have been implemented for fun as a floating marquee text at the bottom, next to the "Add reminder" floating action button.
+Additionally, to make this app a little bit more dynamic, the user is provided with unlimited cat facts, which have been implemented for fun as a floating marquee text at the bottom, next to the __"Add reminder"__ floating action button.
 
-The list of reminders is displayed using a ``RecyclerView``, and each item opens a detail ``fragment`` of the individual __reminder__ set, where additional information is displayed.
+The list of reminders is displayed using a ``RecyclerView``, and each item opens a detail ``fragment`` of the __individual reminder__ set, where additional information is displayed.
 
-This sample app implements Koin for the purpose of ``Dependency Injection`` and easier ``testing``.
+![Login screen](https://github.com/stacyjacks/doctor-cat-app/blob/develop/art/1start_screen_small.png) ![Empty list screen](https://github.com/stacyjacks/doctor-cat-app/blob/develop/art/2empty_list_small.png)
+
+This app implements Koin for the purpose of ``Dependency Injection`` and ``testability``.
 
 The project targets API 30, with a min SDK 26.
 

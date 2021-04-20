@@ -33,7 +33,7 @@
     <ConstraintSet android:id="@+id/end">
         <Constraint
             android:id="@+id/blackCatOneImage"
-            android:layout_width="180dp"
+            android:layout_width="@dimen/cat_one_width"
             android:layout_height="wrap_content"
             motion:layout_constraintBottom_toTopOf="@id/welcomeProvideYourCat"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,7 @@
             motion:srcCompat="@drawable/black_cat_one" />
         <Constraint
             android:id="@+id/blackCatTwoImage"
-            android:layout_width="135dp"
+            android:layout_width="@dimen/cat_two_width"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/padding_large"
             motion:layout_constraintBottom_toTopOf="@id/welcomeProvideYourCat"
